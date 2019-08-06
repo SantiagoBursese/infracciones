@@ -1,0 +1,29 @@
+<p>El limite de velocidad es:</p>
+<input type="number" name= "limite" [(ngModel)] = "valorMaximo">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Patente</th>
+        <th scope="col">Velocidad</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Color</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let registro of vehiculos
+            let i = index " (click)="asignar(registro)" 
+            [ngClass]= "categoriaLinea(registro,valorMinimo(valorMaximo),valorMaximo)">
+        <ng-container *ngIf = "ocultarFilas(registro, valorMinimo(valorMaximo))">
+            <th scope = "row"> {{i}} </th>   
+            <td>{{registro.nombre}}</td>
+            <td>{{registro.patente}}</td>
+            <td>{{registro.velocidad}}</td>
+            <td>{{registro.fecha | date:'medium'| uppercase }}</td>
+            <td>{{registro.color}}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+  <app-detalle [registro] = "registro" ></app-detalle>
